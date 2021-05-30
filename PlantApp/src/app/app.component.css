@@ -3,6 +3,7 @@ body {
     min-height: 100vh;
 }
 
+
 .footer {
     position: fixed;
     left: 0;
@@ -10,10 +11,6 @@ body {
     width: 100%;
     text-align: center;
   }
-
-
-
-
 
   .u-section-1 {
     background-image: none;
