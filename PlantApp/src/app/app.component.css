@@ -1,8 +1,15 @@
 body {
     background-color: #c5edbe;
+    min-height: 100vh;
 }
 
-
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
 
 
 
@@ -14869,7 +14876,7 @@ body {
     display: table;
   }
   .u-menu {
-    opacity: 1;
+    opacity: 100;
   }
   .u-responsive-xl .u-menu,
   .u-responsive-lg .u-menu,
@@ -34251,11 +34258,11 @@ body {
     }
   }
   .u-footer .u-sheet-1 {
-    min-height: 367px;
+    min-height: 295px;
   }
   
   .u-footer .u-layout-wrap-1 {
-    margin: 60px auto 0 0;
+    margin: px auto 0 0;
   }
   
   .u-footer .u-layout-cell-1 {
@@ -34361,7 +34368,7 @@ body {
   }
   
   .u-footer .u-image-1 {
-    margin: -21px auto 21px 20px;
+    margin: -21px auto -21px 20px;
   }
   
   .u-footer .u-logo-image-1 {
