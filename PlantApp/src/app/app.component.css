@@ -8,7 +8,6 @@ body {
 
 
 
-
   .u-section-1 {
     background-image: none;
   }
@@ -14870,7 +14869,7 @@ body {
     display: table;
   }
   .u-menu {
-    opacity: 0;
+    opacity: 1;
   }
   .u-responsive-xl .u-menu,
   .u-responsive-lg .u-menu,
