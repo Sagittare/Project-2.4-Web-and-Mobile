@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { shareReplay, tap } from 'rxjs/operators'
 
-import * as moment from 'moment'
-import * as jwt_decode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-// Pas eventueel de onderstaande link aan: dit moet verwijzen naar de plek waar 
-// je de node-server (uit opgave 3) hebt draaien.
 
 const API_URL = 'http://localhost:5000/api/'
 
 @Injectable()
 export class AuthService {     
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private JwtHelperService: JwtHelperService
+        ) {
     }
     
     login(name:string, password:string ) {
@@ -26,21 +26,41 @@ export class AuthService {
             )
     }
 
+    loginTest(name:string, password:string){
+        console.log("Sending LoginTest...")
+        this.http.post('localhost:5000/api/login', {name, password})
+    }
+
+    getTest(){
+        this.http.get('localhost:5000/api/')
+    }
+
     public isLoggedIn() {
-        //return moment().isBefore(this.getExpiration());
+        return !this.JwtHelperService.isTokenExpired(localStorage.get("jwt"));
     }
 
 
 /* OPGAVE 4, eerste deel
     Deze methode wordt aangeroepen wanneer een gebruiker correcte credentials heeft 
-    ingevoerd (die worden gecheckt door de server). Het JWT dat door de server wordt 
-    teruggestuurd bevat een expiration-moment, opgeslagen in de property 'expiresIn'. 
-    Je kunt gebruik maken van de library moments (die al is geïmporteerd) om deze 
-    expiratie op te tellen bij het huidige moment. Sla deze waarop op in de local storage.
-    Behalve deze expiratie bevat het JWT ook een idToken. Sla dit ook op in de local storage.
+    ingevoerd (die worden gecheckt door de server). Het JWT bevat een idToken. Sla dit op in de local storage.
 */
     private setSession(authResult) {
-        console.log("Setting session")
+        console.log("Setting session");
+
+        localStorage.setItem("jwt", authResult.token);
+        localStorage.setItem("jwtID", this.JwtHelperService.decodeToken(authResult.token).id);
+        
+        let temp = this.JwtHelperService.getTokenExpirationDate(authResult.token);
+        let expireDate: Date;
+        if (temp instanceof Date){
+            expireDate = temp;
+        }
+        else {
+            expireDate = new Date();
+        }
+        
+        localStorage.setItem("jwtDate", expireDate.toDateString());
+        
     }
 
 /* OPGAVE 4: deel twee
@@ -49,7 +69,10 @@ export class AuthService {
     bezoeker uitloggen).
 */
     public logout() {
-        console.log("Logging out")
+        console.log("Logging out");
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("jwtID");
+        localStorage.removeItem("jwtDate");
     }
 
 /* OPGAVE 4: derde deel
@@ -59,12 +82,12 @@ export class AuthService {
 */
 
     public getExpiration() {
-        console.log("Get experiation as json...")
+        localStorage.getItem("jwtDate");
     } 
 
     private handleError(error) {
-        console.error("ERROR...")
-        console.log(error)
+        console.error("ERROR...");
+        console.log(error);
     }
 }
 

@@ -5,9 +5,10 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-// Hoe heet de techniek die hier gebruikt wordt om deze huidige klasse
-// te laten beschikken over die AuthService en die Router?
-  constructor(public auth: AuthService, public router: Router) {}
+  constructor(
+    public auth: AuthService, 
+    public router: Router
+  ) {}
 
 /* OPGAVE 4, vierde deel
     Deze methode wordt gebruikt door de Routes in app-routing.module. Op het moment 
@@ -21,7 +22,12 @@ export class AuthGuardService implements CanActivate {
     geval gewoon een true.
 */
   canActivate(): boolean { 
-    return true;
+    if(localStorage.getItem("jwt")){
+      return true
+    }
+    else{
+      return false
+    }
   }
 
 }

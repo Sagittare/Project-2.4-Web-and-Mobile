@@ -8,6 +8,10 @@ import { MenuComponent } from './menu/menu.component';
 import { MainComponent } from './main/main.component';
 import { PlantComponent } from './plant/plant.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AuthService } from './auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +26,21 @@ import { SettingsComponent } from './settings/settings.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() { 
+        return localStorage.getItem('token');
+        } 
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    JwtHelperService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
