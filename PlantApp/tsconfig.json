@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "types" : ["node", "zone.js"],
     "noImplicitAny": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

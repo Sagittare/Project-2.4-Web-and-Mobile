@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthGuardService } from './auth-guard.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxWebstorageModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() { 

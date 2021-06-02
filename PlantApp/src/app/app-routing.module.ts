@@ -10,8 +10,8 @@ const routes: Routes = [
     {path: 'main', component: MainComponent},
     {path: 'login', component: LoginComponent},
     {path: 'settings',
-    component: SettingsComponent,
-    canActivate: [AuthGuardService]
+    component: SettingsComponent//,
+    //canActivate: [AuthGuardService]
     }
   ]},
   {path: '**', component: MainComponent}

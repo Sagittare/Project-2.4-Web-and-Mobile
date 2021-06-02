@@ -1,1 +1,43 @@
-<p>settings works!</p>
+<p><!--AYAYA--></p>
+<!-- <p>settings works!</p> -->
+<form [formGroup]="SettingsForm" (ngSubmit)="onSubmit()">
+
+	<div class="center">
+    	<label for="thema">
+    		Dark Mode
+    	</label>
+        <label class="switch">
+            <input  id="thema" type="checkbox" formControlName="thema">
+            <span class="slider round"></span>
+        </label>  
+    	<!--<input id="thema" type="checkbox" formControlName="thema"> -->
+	</div>
+
+	<div class="center">
+    	<label for="accountInstellingen">
+      		Account Instellingen
+    	</label>
+    	<input id="accountInstellingen" type="checkbox" formControlName="accountInstellingen">
+  	</div>
+
+    
+    <div class="center">
+        <label for="taal">
+            Taal
+        </label>
+            <select name="taal" id="taal" formControlName="taal">
+                <option value="NL">Nederlands</option>
+                <option value="EN">Engels</option>
+                <option value="JP">Japans</option> 
+            </select>
+    </div> 
+    
+
+
+	<div class="center">
+		<button class="button" type="submit">Opslaan</button>
+	</div>
+
+</form>
+
+
