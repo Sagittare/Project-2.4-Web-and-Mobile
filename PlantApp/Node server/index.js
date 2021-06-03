@@ -69,6 +69,149 @@ app.post('/api/login', function (req, res) {
   }
 });
 
+app.post('/api/createUser', function (req, res) {
+  if (req.body.username && req.body.password && req.body.first && req.body.middle && req.body.last && req.body.email) {
+   const username = req.body.username;
+   const password = req.body.password;
+   const first = req.body.first;
+   const middle = req.body.middle;
+   const last = req.body.last;
+   const email = req.body.email;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    //show success
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/deleteUser', function (req, res) {
+  if (req.body.username && req.body.password && req.body.email) {
+   const username = req.body.username;
+   const password = req.body.password;
+   const email = req.body.email;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    //show success
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/getUserData', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/editUserData', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/getUserPlants', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/getPlantInformation', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/editUserData', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/addPlant', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json({message: 'Success'})
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/setUserPlant', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json(/*JSON-ified SQL reply*/)
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
+app.post('/api/removeUserPlant', function (req, res) {
+  //maybe change to use token. not sure how to identify current user with jwt.
+  if (req.body.username && req.body.password) {
+   const username = req.body.username;
+   const password = req.body.password;
+  }
+
+  if (/*SQL success*/ username == "test"/*<- just to prevent error*/) {
+    res.json({message: 'Success'})
+  } else {
+    res.status(401).json({ message: 'SQL failure' });
+  }
+});
+
 app.route('/api/secret')
   .get(checkIfAuthenticated, function (req, res) {
     res.json({ message: "Success! You can not see this without a token" });

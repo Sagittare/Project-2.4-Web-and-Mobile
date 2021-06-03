@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate {
     geval gewoon een true.
 */
   canActivate(): boolean { 
-    if(localStorage.getItem("jwt")){
+    if(localStorage.getItem("token")){
       return true
     }
     else{

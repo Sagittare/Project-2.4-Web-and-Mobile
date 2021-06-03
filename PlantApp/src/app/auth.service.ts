@@ -5,7 +5,7 @@ import { shareReplay, tap } from 'rxjs/operators'
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
-const API_URL = 'http://localhost:5000/api/'
+const API_URL = 'http://st378373.cmd17c.cmi.hanze.nl/api/'
 
 @Injectable()
 export class AuthService {     
@@ -36,7 +36,7 @@ export class AuthService {
     }
 
     public isLoggedIn() {
-        return !this.JwtHelperService.isTokenExpired(localStorage.get("jwt"));
+        return !this.JwtHelperService.isTokenExpired(localStorage.get("token"));
     }
 
 
@@ -47,8 +47,8 @@ export class AuthService {
     private setSession(authResult) {
         console.log("Setting session");
 
-        localStorage.setItem("jwt", authResult.token);
-        localStorage.setItem("jwtID", this.JwtHelperService.decodeToken(authResult.token).id);
+        localStorage.setItem("token", authResult.token);
+        localStorage.setItem("tokenID", this.JwtHelperService.decodeToken(authResult.token).id);
         
         let temp = this.JwtHelperService.getTokenExpirationDate(authResult.token);
         let expireDate: Date;
@@ -59,7 +59,7 @@ export class AuthService {
             expireDate = new Date();
         }
         
-        localStorage.setItem("jwtDate", expireDate.toDateString());
+        localStorage.setItem("tokenDate", expireDate.toDateString());
         
     }
 
@@ -70,9 +70,9 @@ export class AuthService {
 */
     public logout() {
         console.log("Logging out");
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("jwtID");
-        localStorage.removeItem("jwtDate");
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenID");
+        localStorage.removeItem("tokenDate");
     }
 
 /* OPGAVE 4: derde deel
@@ -82,7 +82,7 @@ export class AuthService {
 */
 
     public getExpiration() {
-        localStorage.getItem("jwtDate");
+        localStorage.getItem("tokenDate");
     } 
 
     private handleError(error) {
