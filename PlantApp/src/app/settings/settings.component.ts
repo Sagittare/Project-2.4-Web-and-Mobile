@@ -1,7 +1,6 @@
 import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-//import Fs from "fs";
 
 @Component({
   selector: 'app-settings',
@@ -9,28 +8,34 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent  {
+  
 
   SettingsForm = this.formBuilder.group({
-    thema: '',
+    thema: (localStorage.getItem('thema')),
     accountInstellingen: '',
-    taal: ''
+    taal: (localStorage.getItem('taal'))
   });
-
+  //console.log((localStorage.getItem('thema')))
   
   constructor(
     private formBuilder: FormBuilder
     ) {}
-  
+    
 
     onSubmit(): void {
-      console.log(this.SettingsForm.value.thema + " " + this.SettingsForm.value.taal)
-      let instellingen = { thema: this.SettingsForm.value.thema, taal: this.SettingsForm.value.taal }
-      console.log(instellingen)
-      localStorage.setItem('settings', JSON.stringify(instellingen));
-      var instellingenJSON = JSON.stringify(instellingen)
-      //var fs = require('fs');
-      //fs.writeFile("thing.json", instellingenJSON ) 
-
+      console.log((localStorage.getItem('thema')))
+      //console.log(this.SettingsForm.value.thema + " " + this.SettingsForm.value.taal)
+      //let instellingen = { thema: this.SettingsForm.value.thema, taal: this.SettingsForm.value.taal }
+      let taal = this.SettingsForm.value.taal
+      let thema = this.SettingsForm.value.thema 
+      //if (instellingen == null) {
+      //  instellingen = { thema: false, taal: "NL"}
+      //}
+      localStorage.setItem('thema', thema);
+      localStorage.setItem('taal', taal);
+      
+      //localStorage.setItem('settings', JSON.stringify(instellingen));
+      console.log((localStorage.getItem('thema')))
     }
         
       
