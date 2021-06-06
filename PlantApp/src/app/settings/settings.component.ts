@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component} from '@angular/core';
+import { FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent  {
+  //@Input() thema!: boolean; 
+  //@Output() themaChange = new EventEmitter<boolean>();
   
 
   SettingsForm = this.formBuilder.group({

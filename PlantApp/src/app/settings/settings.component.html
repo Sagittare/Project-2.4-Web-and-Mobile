@@ -4,13 +4,20 @@
 
 	<div class="center">
     	<label for="thema">
-    		Dark Mode
-    	</label>
+    		Thema
+		</label>
+		<!--
         <label class="switch">
-            <input  id="thema" type="checkbox" formControlName="thema">
+            <input id="thema" type="checkbox" formControlName="thema">
             <span class="slider round"></span>
         </label>  
-    	<!--<input id="thema" type="checkbox" formControlName="thema"> -->
+    	<input id="thema" type="checkbox" formControlName="thema"> 
+		-->
+		<select name="thema" id="thema" formControlName="thema">
+			<option value="LIGHT">Licht</option>
+			<option value="DARK">Donker</option>
+			
+		</select>
 	</div>
 
 	<div class="center">
