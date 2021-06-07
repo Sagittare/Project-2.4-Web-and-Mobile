@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { HttpClient } from '@angular/common/http'
+import { subscribeOn } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -30,15 +32,20 @@ export class LoginComponent {
     ) {}
 
   onSubmit(): void {
-    this.AuthService.login(this.loginForm.value.username, this.loginForm.value.password);
+    const login = this.AuthService.login(this.loginForm.value.username, this.loginForm.value.password);
+    login.subscribe();
   }
 
+
+
   onSubmitTest(): void {
-    this.AuthService.loginTest("test", "test");
+    const test = this.AuthService.loginTest("test", "test");
+    test.subscribe();
   }
 
   onGetTest(): void {
-    this.AuthService.getTest;
+    const test = this.AuthService.getTest;
+    //test.subscribe();
   }
 
 }

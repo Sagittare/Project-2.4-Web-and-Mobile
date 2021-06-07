@@ -5,7 +5,7 @@ import { shareReplay, tap } from 'rxjs/operators'
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
-const API_URL = 'http://st378373.cmd17c.cmi.hanze.nl/api/'
+const API_URL = 'http://192.168.1.2:1337/api/'
 
 @Injectable()
 export class AuthService {     
@@ -27,12 +27,13 @@ export class AuthService {
     }
 
     loginTest(name:string, password:string){
-        console.log("Sending LoginTest...")
-        this.http.post('localhost:5000/api/login', {name, password})
+        console.log("Sending LoginTest...");
+        return this.http.post(API_URL+'login', {name, password});
     }
+    
 
     getTest(){
-        this.http.get('localhost:5000/api/')
+        return this.http.get(API_URL);
     }
 
     public isLoggedIn() {
