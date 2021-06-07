@@ -43,11 +43,9 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/api/login', function (req, res) {
-  console.log("Credentials POST.")
   if (req.body.name && req.body.password) {
     var name = req.body.name;
   }
-  res.json( {message: 'hallo users...'} )
 
   var user = users[_.findIndex(users, { name: name })];
 
@@ -55,15 +53,16 @@ app.post('/api/login', function (req, res) {
     res.status(404).json({ message: 'no such user found' });
   }
 
+  var date = new Date()
+
   if (user.password === req.body.password) {
-    let payload = { name, id: user.id };
+    let payload = { name, id: user.id, exp: date.getTime + 3600000 };
     let token = jwt.sign(payload, privateKey, signOptions);
     res.json({
       message: 'ok',
       token: token,
       expiresIn: jwt.decode(token).exp
     });
-    console.log("Token generated.")
   } else {
     res.status(401).json({ message: 'password did not match' });
   }
