@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,12 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
         return localStorage.getItem('token');
         } 
       }
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     })
   ],
   providers: [
