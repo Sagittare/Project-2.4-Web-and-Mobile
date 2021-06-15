@@ -25,7 +25,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/ngsw-worker.js",
+              "src/ngsw.json"
             ],
             "styles": [
               "src/styles.css"
@@ -39,13 +41,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "500000000000000000000000000000000000000kb",
+                  "maximumError": "1000000000000000000000000000000000000mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "100000000000000000000kb",
+                  "maximumError": "10000000000000000000000000000000000000000000000000000000000000kb"
                 }
               ],
               "fileReplacements": [
@@ -95,7 +97,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/ngsw-worker.js",
+              "src/ngsw.json"
             ],
             "styles": [
               "src/styles.css"
