@@ -15,6 +15,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TileComponent } from './tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { environment } from '../environments/environment';
     MainComponent,
     PlantComponent,
     SettingsComponent,
+    TileComponent,
   ],
   imports: [
     BrowserModule,
