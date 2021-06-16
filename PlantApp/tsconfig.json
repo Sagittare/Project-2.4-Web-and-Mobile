@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types" : ["node", "zone.js"],
+    "types" : ["node", "zone.js", "jasmine"],
     "noImplicitAny": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
