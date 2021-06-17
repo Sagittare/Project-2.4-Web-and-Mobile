@@ -37,9 +37,14 @@ export class AuthService {
     }
 
     public isLoggedIn() {
-        return !this.JwtHelperService.isTokenExpired(localStorage.get("token"));
+        let token = localStorage.get("token");
+        if (token) {
+            return !this.JwtHelperService.isTokenExpired(token);
+        }
+        else{
+            return false;
+        }  
     }
-
 
 /* OPGAVE 4, eerste deel
     Deze methode wordt aangeroepen wanneer een gebruiker correcte credentials heeft 

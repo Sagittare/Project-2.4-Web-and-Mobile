@@ -36,8 +36,6 @@ export class LoginComponent {
     login.subscribe();
   }
 
-
-
   onSubmitTest(): void {
     const test = this.AuthService.loginTest("test", "test");
     test.subscribe();
