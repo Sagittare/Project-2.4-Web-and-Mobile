@@ -11,7 +11,7 @@ const routes: Routes = [
     {path: 'main', 
     component: MainComponent,
     children: [
-      {path: 'start', component: TileComponent}
+      {path: 'tiles', component: TileComponent}
     ]},
     {path: 'login', component: LoginComponent},
     {path: 'settings',

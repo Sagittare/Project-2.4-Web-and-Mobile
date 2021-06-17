@@ -1,5 +1,4 @@
 body {
-    background-color: #c5edbe;
     min-height: 100vh;
 }
 
@@ -24,14 +23,14 @@ body {
     min-height: 544px;
     grid-auto-rows: 100%;
     margin-top: 46px;
-    margin-bottom: 60px;
+    margin-bottom: 400px;
     height: auto;
   }
   
   .u-section-1 .u-repeater-1 {
     grid-auto-columns: calc(50% - 5px);
     grid-template-columns: calc(50% - 5px) calc(50% - 5px);
-    grid-auto-rows: calc(50% - 5px);
+    grid-auto-rows: calc(265px);
     grid-gap: 10px 10px;
   }
   
