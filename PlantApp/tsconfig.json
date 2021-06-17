@@ -1,8 +1,7 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types" : ["node", "zone.js"],
+    "types" : ["node", "zone.js", "jasmine"],
     "noImplicitAny": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
