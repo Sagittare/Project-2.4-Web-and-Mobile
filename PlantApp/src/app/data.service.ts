@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
 
 
 const API_URL = 'http://192.168.1.2:1337/api/'
@@ -10,11 +11,13 @@ const API_URL = 'http://192.168.1.2:1337/api/'
 export class DataService {
 
  constructor(
+   private interceptor: JwtInterceptor,
     private http: HttpClient
   ) { }
 
   getUserPlants() {
-    return this.http.get(API_URL+'getUserPlants')
+    return this.http.get(API_URL+'getUserPlants');
+    
   }
 
   getPlantInformation(plantID:number) {

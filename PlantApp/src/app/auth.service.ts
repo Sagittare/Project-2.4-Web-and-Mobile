@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { shareReplay, tap } from 'rxjs/operators'
 
-import { JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtInterceptor } from './jwt.interceptor';
 
 
 const API_URL = 'http://192.168.1.2:1337/api/'
@@ -10,6 +11,7 @@ const API_URL = 'http://192.168.1.2:1337/api/'
 @Injectable()
 export class AuthService {     
     constructor(
+        private interceptor: JwtInterceptor,
         private http: HttpClient,
         private JwtHelperService: JwtHelperService
         ) {

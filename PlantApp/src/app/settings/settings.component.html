@@ -91,7 +91,7 @@
   	</div>
 
 	<div class="center">
-		<button class="button" type="submit">Verander gebruikersnaam</button>
+		<button class="button" type="submit">Verander wachtwoord</button>
 	</div>
 
 </form>
@@ -119,7 +119,15 @@
 	</select>
 
 	<div class="center">
-		<button class="button" type="submit">Verander gebruikersnaam</button>
+		<button class="button" type="submit">Verwijder mij!</button>
+	</div>
+
+</form>
+
+<form [formGroup]="logoutForm" (ngSubmit)="onSubmitLogout()">
+
+	<div class="center">
+		<button class="button" type="submit">Log uit</button>
 	</div>
 
 </form>

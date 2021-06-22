@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder} from '@angular/forms';
+import { AuthService } from '../auth.service';
 import { UserManipulatorService } from '../user-manipulator.service';
 
 
@@ -37,9 +38,14 @@ export class SettingsComponent  {
     confirm: 'confirm'
   });
 
+  logoutForm = this.formBuilder.group({
+    
+  })
+
   constructor(
     private formBuilder: FormBuilder,
-    private userManipulator: UserManipulatorService
+    private userManipulator: UserManipulatorService,
+    private AuthService: AuthService
     ) {}
     
 
@@ -62,18 +68,19 @@ export class SettingsComponent  {
     onSubmitName(): void {
       const name = this.nameForm.value.username;
       const password = this.nameForm.value.password;
-      this.userManipulator.editUsername(name, password);
+      this.userManipulator.editUsername(name, password).subscribe();
     }
 
     onSubmitPassword(): void {
       const password = this.passwordForm.value.password;
       const newPassword = this.passwordForm.value.newPassword;
       const newPasswordVerify = this.passwordForm.value.newPasswordVerify;
+      const token = localStorage.getItem("token");
       if (newPassword == newPasswordVerify) {
-        this.userManipulator.editPassword(password, newPassword);
+        this.userManipulator.editPassword(password, newPassword, token).subscribe();
       }
       else {
-        // show that passwords don't match!
+        alert("Nieuwe wachtwoorden zijn niet gelijk.")
       }
     }  
 
@@ -83,11 +90,15 @@ export class SettingsComponent  {
       const confirm = this.deleteForm.value.confirm;
 
       if (confirm == 1) {
-        this.userManipulator.DeleteUser(name, password);
+        this.userManipulator.DeleteUser(name, password).subscribe();
       }
       else {
         //show that operation was cancelled by user input!
       }
+    }
+
+    onSubmitLogout(): void {
+      this.AuthService.logout();
     }
 
   }

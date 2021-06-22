@@ -6,7 +6,7 @@ import { MainComponent } from './main/main.component';
 import { TileComponent } from './tile/tile.component';
 import { SettingsComponent } from './settings/settings.component';
 
-const routes: Routes = [
+const routes: Routes = [ 
   {path: '', children: [
     {path: 'main', 
     component: MainComponent,

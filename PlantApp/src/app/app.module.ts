@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 import { TileComponent } from './tile/tile.component';
 import { UserManipulatorService } from './user-manipulator.service';
 import { DataService } from './data.service';
+import { GridAssemblerComponent } from './grid-assembler/grid-assembler.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { DataService } from './data.service';
     PlantComponent,
     SettingsComponent,
     TileComponent,
+    GridAssemblerComponent,
   ],
   imports: [
     BrowserModule,
