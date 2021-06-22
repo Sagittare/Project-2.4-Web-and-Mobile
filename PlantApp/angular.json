@@ -30,8 +30,7 @@
               "src/ngsw.json"
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/app.component.css"
+              "src/styles.css"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -103,8 +102,7 @@
               "src/ngsw.json"
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/app.component.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
