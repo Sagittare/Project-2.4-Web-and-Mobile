@@ -1,55 +1,12 @@
-<section class=" u-clearfix u-section-1" id="sec-e004">
-    <div class="u-clearfix u-sheet "><!--products--><!--products_options_json--><!--{"type":"Recent","source":"","tags":"","count":"","gridProps":[{"mode":"XL","columns":2,"gap":10,"styles":".u-section-1 .u-repeater-1 {grid-auto-rows: [[XL_VALUE]] !important}"},{"mode":"LG","columns":2,"gap":10,"styles":"@media (max-width: 1199px) {.u-section-1 .u-repeater-1 {grid-auto-rows: [[LG_VALUE]] !important}}"},{"mode":"MD","columns":2,"gap":10,"styles":"@media (max-width: 991px) {.u-section-1 .u-repeater-1 {grid-auto-rows: [[MD_VALUE]] !important}}"},{"mode":"SM","columns":1,"gap":10,"styles":"@media (max-width: 767px) {.u-section-1 .u-repeater-1 {grid-auto-rows: [[SM_VALUE]] !important}}"},{"mode":"XS","columns":1,"gap":10,"styles":"@media (max-width: 575px) {.u-section-1 .u-repeater-1 {grid-auto-rows: [[XS_VALUE]] !important}}"}]}--><!--/products_options_json-->
-        <div class="u-products-1">
-            <div class="u-repeater u-repeater-1"><!--product_item-->
-
-                <!--
-                <div class="u-container-style u-palette-1-light-2 u-products-item u-radius-31 u-repeater-item u-shape-round u-repeater-item-1" data-href="plant_1.html" data-page-id="195805829">
-                    <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-container-layout-1">
-                      <img alt="" class="u-align-center-xs u-image u-image-round u-product-control u-image-1" src="assets/img/plant-icon.png" data-image-width="550" data-image-height="600"><
-                      <div class="u-align-left u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                          <p class="u-text u-text-1">12:05</p>
-                          <h3 class="u-text u-text-2">Plant 1</h3>
-                          <h6 class="u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-3">Latijnse naam</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                -->
-
-                <div id="tiles">
-                    <!-- TILES -->
-                </div>
-
-                <script>
-                    var myHTML = '';
-                    var plantName = '';
-
-                    var wrapper = document.getElementById("tiles");
-                    var time = 0;
-
-                    for (var i = 0; i < 10; i++) {
-                        time += 1; // UIT DATABASE HALEN
-                        plantName = "gimme the plant"; // UIT DATABASE HALEN
-                        myHTML += 
-                        '<div class="u-container-style u-palette-1-light-2 u-products-item u-radius-31 u-repeater-item u-shape-round u-repeater-item-1" data-href="plant_1.html" data-page-id="195805829">' +
-                            '<div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-container-layout-1">' +
-                              '<img alt="" class="u-align-center-xs u-image u-image-round u-product-control u-image-1" src="assets/img/plant-icon.png" data-image-width="550" data-image-height="600">' +
-                              '<div class="u-align-left u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">' +
-                                '<div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">' +
-                                  '<p class="u-text u-text-1">' + time + '</p>' +
-                                  '<h3 class="u-text u-text-2">' + plantName + '</h3>' +
-                                '</div>' +
-                              '</div>' +
-                            '</div>' +
-                          '</div>';
-                    }
-                    
-                    wrapper.innerHTML = myHTML
-                </script>
-
-            </div>
-        </div><!--/products-->
+<div class="u-container-style u-palette-1-light-2 u-products-item u-radius-31 u-repeater-item u-shape-round u-repeater-item-1" data-href="plant_1.html" data-page-id="195805829">
+  <div class="u-container-layout u-similar-container u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-container-layout-1">
+    <img alt="" class="u-align-center-xs u-image u-image-round u-product-control u-image-1" src="assets/img/plant-icon.png" data-image-width="550" data-image-height="600">
+    <div class="u-align-left u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
+      <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
+        <p class="u-text u-text-1">12:05</p>
+        <h3 class="u-text u-text-2">Plant 1</h3>
+        <h6 class="u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-3">Latijnse naam</h6>
+      </div>
     </div>
-</section> 
+  </div>
+</div>
