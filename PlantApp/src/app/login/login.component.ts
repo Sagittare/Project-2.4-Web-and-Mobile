@@ -35,17 +35,5 @@ export class LoginComponent {
     const login = this.AuthService.login(this.loginForm.value.username, this.loginForm.value.password);
     login.subscribe();
   }
-
-
-
-  onSubmitTest(): void {
-    const test = this.AuthService.loginTest("test", "test");
-    test.subscribe();
-  }
-
-  onGetTest(): void {
-    const test = this.AuthService.getTest;
-    //test.subscribe();
-  }
-
+  
 }

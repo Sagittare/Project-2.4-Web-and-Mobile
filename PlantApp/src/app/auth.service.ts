@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { shareReplay, tap } from 'rxjs/operators'
 
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtInterceptor } from '@auth0/angular-jwt';
 
 
 const API_URL = 'http://192.168.1.2:1337/api/'
@@ -26,20 +26,19 @@ export class AuthService {
             )
     }
 
-    loginTest(name:string, password:string){
-        console.log("Sending LoginTest...");
-        return this.http.post(API_URL+'login', {name, password});
-    }
-    
-
-    getTest(){
-        return this.http.get(API_URL);
-    }
-
     public isLoggedIn() {
-        return !this.JwtHelperService.isTokenExpired(localStorage.get("token"));
+        let token = localStorage.getItem("token");
+        if (token) {
+            return !this.JwtHelperService.isTokenExpired(token);
+        }
+        else{
+            return false;
+        }  
     }
 
+    public getToken(){
+        return localStorage.getItem("token");
+    }
 
 /* OPGAVE 4, eerste deel
     Deze methode wordt aangeroepen wanneer een gebruiker correcte credentials heeft 

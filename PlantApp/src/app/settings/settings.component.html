@@ -39,12 +39,87 @@
             </select>
     </div> 
     
-
-
 	<div class="center">
 		<button class="button" type="submit">Opslaan</button>
 	</div>
 
 </form>
 
+<form [formGroup]="nameForm" (ngSubmit)="onSubmitName()">
 
+	<div class="center">
+    	<label for="username">
+    		Nieuwe gebruikersnaam
+    	</label>
+    	<input id="username" type="text" formControlName="username">
+	</div>
+
+	<div class="center">
+    	<label for="password">
+      		Wachtwoord
+    	</label>
+    	<input id="password" type="password" formControlName="password">
+  	</div>
+
+	<div class="center">
+		<button class="button" type="submit">Verander gebruikersnaam</button>
+	</div>
+
+</form>
+
+<form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+
+	<div class="center">
+    	<label for="password">
+      		Wachtwoord
+    	</label>
+    	<input id="password" type="password" formControlName="password">
+  	</div>
+
+	<div class="center">
+    	<label for="newPassword">
+      		Nieuw wachtwoord
+    	</label>
+    	<input id="newPassword" type="password" formControlName="newPassword">
+  	</div>
+
+	<div class="center">
+    	<label for="newPasswordVerify">
+      		Herhaal nieuw wachtwoord
+    	</label>
+    	<input id="newPasswordVerify" type="password" formControlName="newPasswordVerify">
+  	</div>
+
+	<div class="center">
+		<button class="button" type="submit">Verander gebruikersnaam</button>
+	</div>
+
+</form>
+
+
+<form [formGroup]="deleteForm" (ngSubmit)="onSubmitDelete()">
+
+	<div class="center">
+    	<label for="username">
+    		Nieuwe gebruikersnaam
+    	</label>
+    	<input id="username" type="text" formControlName="username">
+	</div>
+
+	<div class="center">
+    	<label for="password">
+      		Wachtwoord
+    	</label>
+    	<input id="password" type="password" formControlName="password">
+  	</div>
+
+	<select name="confirm" id="confirm" formControlName="confirm">
+		<option value = 0>NEE, ik wil niet al mijn data kwijtraken!</option>
+		<option value = 1>JA, verwijder mijn account.</option>	
+	</select>
+
+	<div class="center">
+		<button class="button" type="submit">Verander gebruikersnaam</button>
+	</div>
+
+</form>
