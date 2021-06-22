@@ -50,7 +50,7 @@ con.connect(function(err) {
 
 app.get('/api', (req, res) => {
   console.log("Get received")
-  res.json( {message: 'hallo allemaal...'} )
+  res.json( {message: 'hallo...'} )
 });
 
 app.post('/api/login', function (req, res) {
@@ -64,22 +64,22 @@ app.post('/api/login', function (req, res) {
 
     con.query("SELECT EXISTS ( SELECT AccountNaam FROM user WHERE AccountNaam = '" + username + "');", function (err, result) {
       if(result == 0) {
-        res.status(404).json({ message: 'no such user found' });
+        res.status(406).json({ message: 'no such user found' });
       }
       else if (err) {
-        res.status(401).json({ message: 'error during user lookup' });
+        res.status(500).json({ message: 'error during user lookup' });
       }
       else {
         con.query("SELECT Wachtwoord FROM user WHERE AccountNaam = '" + username + "';"), function (err, result) {
           userPassword = result;
           if (err) {
-            res.status(401).json({ message: 'failed to collect password' });
+            res.status(500).json({ message: 'failed to collect password' });
           }
         }
         con.query("SELECT UserID FROM user WHERE AccountNaam = '" + username + "';"), function (err, result) {
           userID = result;
           if (err) {
-            res.status(401).json({ message: 'failed to collect user id' });
+            res.status(500).json({ message: 'failed to collect user id' });
           }
         }
       }
@@ -95,7 +95,7 @@ app.post('/api/login', function (req, res) {
       });
       console.log("token sent");
     } else {
-      res.status(401).json({ message: 'password did not match' });
+      res.status(406).json({ message: 'password did not match' });
     }
   }
 
@@ -128,146 +128,197 @@ app.post('/api/createUser', function (req, res) {
   if (req.body.username && req.body.password) {
     const username = req.body.username;
     const password = req.body.password;
-    con.query("INSERT INTO user (AccountNaam, Wachtwoord, Admin) VALUES ('" + username + ", " + password + ", 0');"), function (err) {
-      if (err) {
-        res.status(401).json({ message: 'SQL failure' });
+
+    con.query("SELECT EXISTS (SELECT Accountnaam FROM user WHERE Accountnaam = '" + username + "');"), function (err, result) {
+      if(result == 1) {
+        res.status(406).json({ message: 'username already exists' });
+      }
+      else if (err) {
+        res.status(500).json({ message: 'error during user lookup' });
       }
       else {
-        res.json({message: 'user created'})
+        con.query("INSERT INTO user (AccountNaam, Wachtwoord, Admin) VALUES ('" + username + ", " + password + ", 0');"), function (err) {
+          if (err) {
+            res.status(500).json({ message: 'SQL failure' });
+          }
+          else {
+            res.json({message: 'user created'})
+          }
+        }
       }
-    }
+    }  
   }
-
-  
 });
 
 app.post('/api/deleteUser', function (req, res) {
-  if (req.body.username && req.body.password) {
+  if (req.body.token && req.body.username && req.body.password) {
     const username = req.body.username;
     const password = req.body.password;
+    const token = req.body.token;
 
-    con.query("SELECT EXISTS (SELECT AccountNaam FROM user WHERE AccountNaam = '" + username + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'no such user found' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during user lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("SELECT Wachtwoord FROM user WHERE AccountNaam = '" + username + "';"), function (err, result) {
-          userPassword = result;
-          if (err) {
-            res.status(401).json({ message: 'failed to collect password' });
-          }
-        }
+        deleteUser(username, password, decoded.id);
       }
-    }
-
-    if (userPassword === password) {
-      con.query("DELETE FROM customers WHERE AccountNaam = '" + username + "';"), function (err) {
-        if (err) {
-          res.status(401).json({ message: 'failed to delete user with name: ' + username });
-        }
-        else {
-          res.json({message: 'user deleted'})
-        }
-      }
-    }
-    else {
-      res.status(404).json({ message: 'no such user found' });
-    }
+    });
   }
 });
+
+function deleteUser(username, password, userID) {
+  con.query("SELECT EXISTS (SELECT UserID FROM user WHERE UserID = '" + userID + "');"), function (err, result) {
+    if(result == 0) {
+      res.status(406).json({ message: 'no such user found' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during user lookup' });
+    }
+    else {
+      con.query("SELECT Wachtwoord FROM user WHERE UserID = '" + userID + "';"), function (err, result) {
+        userPassword = result;
+        if (err) {
+          res.status(500).json({ message: 'failed to collect password' });
+        }
+      }
+    }
+  }
+
+  if (userPassword === password) {
+    con.query("DELETE FROM customers WHERE AccountNaam = '" + username + "';"), function (err) {
+      if (err) {
+        res.status(500).json({ message: 'failed to delete user with name: ' + username });
+      }
+      else {
+        res.json({message: 'user deleted'})
+      }
+    }
+  }
+  else {
+    res.status(406).json({ message: 'no such user found' });
+  }
+}
 
 app.post('/api/editUsername', function (req, res) {
   if (req.body.token && req.body.username && req.body.password) {
-    const token = req.body.token;
-    const userID = jwt.decode(token).id;
     const username = req.body.username;
     const password = req.body.password;
+    const token = req.body.token;
 
-    con.query("SELECT EXISTS (SELECT UserID FROM user WHERE UserID = '" + userID + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'no such user found' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during user lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("SELECT Wachtwoord FROM user WHERE UserID = '" + userID + "';"), function (err, result) {
-          userPassword = result;
-          if (err) {
-            res.status(401).json({ message: 'failed to collect password' });
-          }
+        editUserName(username, password, decoded.id);
+      }
+    });
+  }
+});
+
+function editUserName(username, password, userID) {
+  con.query("SELECT EXISTS (SELECT UserID FROM user WHERE UserID = '" + userID + "');"), function (err, result) {
+    if(result == 0) {
+      res.status(406).json({ message: 'no such user found' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during user lookup' });
+    }
+    else {
+      con.query("SELECT Wachtwoord FROM user WHERE UserID = '" + userID + "';"), function (err, result) {
+        userPassword = result;
+        if (err) {
+          res.status(500).json({ message: 'failed to collect password' });
         }
-        if (userPassword === password) {
-          con.query("UPDATE user SET Accountnaam = " + username + "  WHERE UserID = '" + id + "';"), function (err) {
-            if (err) {
-              res.status(401).json({ message: 'failed to set username' });
-            }
+      }
+      if (userPassword === password) {
+        con.query("UPDATE user SET Accountnaam = " + username + "  WHERE UserID = '" + id + "';"), function (err) {
+          if (err) {
+            res.status(500).json({ message: 'failed to set username' });
           }
         }
       }
     }
   }
-});
+}
 
 app.post('/api/editPassword', function (req, res) {
   if (req.body.token && req.body.password && req.body.newPassword) {
-    const token = req.body.token;
-    const userID = jwt.decode(token).id;
     const password = req.body.password;
     const newPassword = req.body.newPassword;
+    const token = req.body.token;
 
-    con.query("SELECT EXISTS (SELECT UserID FROM user WHERE UserID = '" + userID + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'no such user found' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during user lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("SELECT Wachtwoord FROM user WHERE UserID = '" + userID + "';"), function (err, result) {
-          userPassword = result;
-          if (err) {
-            res.status(401).json({ message: 'failed to collect password' });
-          }
+        editUserPassword(password, newPassword, decoded.id);
+      }
+    });
+  }
+});
+
+function editUserPassword(password, newPassword, userID) {
+  con.query("SELECT EXISTS (SELECT UserID FROM user WHERE UserID = '" + userID + "');"), function (err, result) {
+    if(result == 0) {
+      res.status(406).json({ message: 'no such user found' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during user lookup' });
+    }
+    else {
+      con.query("SELECT Wachtwoord FROM user WHERE UserID = '" + userID + "';"), function (err, result) {
+        userPassword = result;
+        if (err) {
+          res.status(500).json({ message: 'failed to collect password' });
         }
-        if (userPassword === password) {
-          con.query("UPDATE user SET Wachtwoord = " + newPassword + "  WHERE UserID = '" + id + "';"), function (err) {
-            if (err) {
-              res.status(401).json({ message: 'failed to set password' });
-            }
+      }
+      if (userPassword === password) {
+        con.query("UPDATE user SET Wachtwoord = " + newPassword + "  WHERE UserID = '" + id + "';"), function (err) {
+          if (err) {
+            res.status(500).json({ message: 'failed to set password' });
           }
         }
       }
     }
   }
-});
+}
 
-app.post('/api/getUserPlants', function (req, res) {
+app.get('/api/getUserPlants', function (req, res) {
   if (req.body.token) {
     const token = req.body.token;
-    const userID = jwt.decode(token).id;
 
-    con.query("SELECT EXISTS (SELECT UserID FROM userplants WHERE UserID = '" + userID + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'this user has no plants yet' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during userplants lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("SELECT JSON_ARRAYAGG (JSON_OBJECT ('UniqueID', UniqueID, 'PlantID', PlantID, 'UserID', UserID, 'DiscriptionOverride', DiscriptionOverride,'NameOverride', NameOverride, 'Alive', Alive)) FROM userplants WHERE UserID = '" + userID + "';"), function (err, result) {
-          res.json(result);
-          if (err) {
-            res.status(401).json({ message: 'failed to collect plants' });
-          }
+        getUserPlants(decoded.id);
+      }
+    });
+  }
+});
+
+function getUserPlants(userID) {
+  con.query("SELECT EXISTS (SELECT UserID FROM userplants WHERE UserID = '" + userID + "');"), function (err, result) {
+    if(result == 0) {
+      res.json({ message: 'this user has no plants yet' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during userplants lookup' });
+    }
+    else {
+      con.query("SELECT JSON_ARRAYAGG (JSON_OBJECT ('UniqueID', UniqueID, 'PlantID', PlantID, 'UserID', UserID, 'DiscriptionOverride', DiscriptionOverride,'NameOverride', NameOverride, 'Alive', Alive)) FROM userplants WHERE UserID = '" + userID + "';"), function (err, result) {
+        res.json(result);
+        if (err) {
+          res.status(500).json({ message: 'failed to collect plants' });
         }
       }
     }
   }
-});
+}
 
 app.post('/api/getPlantInformation', function (req, res) {
   if (req.body.plantID) {
@@ -275,16 +326,16 @@ app.post('/api/getPlantInformation', function (req, res) {
     
     con.query("SELECT EXISTS (SELECT PlantID FROM plants WHERE PlantID = '" + plantID + "');"), function (err, result) {
       if(result == 0) {
-        res.status(404).json({ message: 'this plant does not exist' });
+        res.status(406).json({ message: 'this plant does not exist in the database' });
       }
       else if (err) {
-        res.status(401).json({ message: 'error during plant lookup' });
+        res.status(500).json({ message: 'error during plant lookup' });
       }
       else {
         con.query("SELECT JSON_OBJECT('PlantID', PlantID, 'Name', Name, 'Description', Description, 'NotificationFrequency', NotificationFrequency, 'WaterAmount', Wateramount, 'minTemp' , minTemp, 'maxTemp', maxTemp) FROM plants WHERE PlantID = '" + plantID + "';"), function (err, result) {
           res.json(result);
           if (err) {
-            res.status(401).json({ message: 'failed to collect plants' });
+            res.status(500).json({ message: 'failed to collect plants' });
           }
         }
       }
@@ -298,85 +349,116 @@ app.post('/api/addPlant', function (req, res) {
     const description = req.body.description;
     const notificationFrequency = req.body.notificationFrequency;
     const waterAmount = req.body.waterAmount;
-    
-    con.query("INSERT INTO plants (Name, Description, NotificationFrequency, WaterAmount) VALUES (" + plantName + ", " + description + ", " + notificationFrequency + ", " + waterAmount + ");"), function (err) {
+    const token = req.body.token;
+
+    jwt.verify(token, privateKey, (err, decoded) => {
       if (err) {
-        res.status(401).json({ message: 'error inserting plant into database' });
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        res.json({message: 'plant added to database'})
+        addPlant(plantName, description, notificationFrequency, waterAmount);
       }
-    }
+    });
   }
 });
+
+function addPlant(plantName, description, notificationFrequency, waterAmount) {
+  con.query("INSERT INTO plants (Name, Description, NotificationFrequency, WaterAmount) VALUES (" + plantName + ", " + description + ", " + notificationFrequency + ", " + waterAmount + ");"), function (err) {
+    if (err) {
+      res.status(500).json({ message: 'error inserting plant into database' });
+    }
+    else {
+      res.json({message: 'plant added to database'})
+    }
+  }
+}
 
 app.post('/api/setUserPlant', function (req, res) {
   
   if (req.body.token && req.body.plantID) {
-    const token = req.body.token;
-    const userID = jwt.decode(token).id;
     const plantID = req.body.plantID;
     const description = req.body.description;
     const plantName = req.body.plantName;
-    
+    const token = req.body.token;
 
-   con.query("SELECT EXISTS (SELECT PlantID FROM plants WHERE PlantID = '" + plantID + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'this plant does not exist' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during plant lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("INSERT INTO plants (PlantID, UserID, DescriptionOverride, NameOverride, Alive) VALUES (" + plantID + ", " + userID + ", " + description + ", " + plantName + ", 1);"), function (err) {
-          if (err) {
-            res.status(401).json({ message: 'failed to collect plants' });
-          }
-          else {
-            res.json({message: 'plant added to user'})
-          }
+        setUserPlant(plantID, decoded.id, description, plantName);
+      }
+    });
+  }
+});
+
+function setUserPlant(plantID, userID, description, plantName) {
+  con.query("SELECT EXISTS (SELECT PlantID FROM plants WHERE PlantID = '" + plantID + "');"), function (err, result) {
+    if(result == 0) {
+      res.status(406).json({ message: 'this plant does not exist' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during plant lookup' });
+    }
+    else {
+      con.query("INSERT INTO plants (PlantID, UserID, DescriptionOverride, NameOverride, Alive) VALUES (" + plantID + ", " + userID + ", " + description + ", " + plantName + ", 1);"), function (err) {
+        if (err) {
+          res.status(500).json({ message: 'failed to collect plants' });
+        }
+        else {
+          res.json({message: 'plant added to user'})
         }
       }
     }
   }
-});
+}
 
 app.post('/api/removeUserPlant', function (req, res) {
   if (req.body.token && req.body.uniqueID) {
-    const token = req.body.token;
-    const userID = jwt.decode(token).id;
     const uniqueID = req.body.uniqueID;
+    const token = req.body.token;
 
-    con.query("SELECT EXISTS (SELECT UniqueID FROM userplants WHERE UniqueID = '" + uniqueID + "');"), function (err, result) {
-      if(result == 0) {
-        res.status(404).json({ message: 'this plant does not exist' });
-      }
-      else if (err) {
-        res.status(401).json({ message: 'error during userplant lookup' });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: 'jwt not valid' });
       }
       else {
-        con.query("SELECT UserID FROM userplants WHERE UniqueID = '" + uniqueID + "');"), function (err, result) {
-          if(result == userID) {
-            con.query("DELETE FROM userplants WHERE UniqueID = '" + uniqueID + "';"), function (err) {
-              if (err) {
-                res.status(401).json({ message: 'error during userplant removal' });
-              }
-              else {
-                res.status(404).json({ message: 'plant deleted from user' });
-              }
+        removeUserPlant(uniqueID, decoded.id);
+      }
+    });
+  }
+});
+
+function removeUserPlant(uniqueID, userID) {
+  con.query("SELECT EXISTS (SELECT UniqueID FROM userplants WHERE UniqueID = '" + uniqueID + "');"), function (err, result) {
+    if(result == 0) {
+      res.status(406).json({ message: 'this plant does not exist' });
+    }
+    else if (err) {
+      res.status(500).json({ message: 'error during userplant lookup' });
+    }
+    else {
+      con.query("SELECT UserID FROM userplants WHERE UniqueID = '" + uniqueID + "');"), function (err, result) {
+        if(result == userID) {
+          con.query("DELETE FROM userplants WHERE UniqueID = '" + uniqueID + "';"), function (err) {
+            if (err) {
+              res.status(500).json({ message: 'error during userplant removal' });
+            }
+            else {
+              res.json({ message: 'plant deleted from user' });
             }
           }
-          else if (err) {
-            res.status(401).json({ message: 'error during userplant lookup' });
-          }
-          else {
-            res.status(404).json({ message: 'this plant does not belong to this user' });
-          }
+        }
+        else if (err) {
+          res.status(500).json({ message: 'error during userplant lookup' });
+        }
+        else {
+          res.status(401).json({ message: 'this plant does not belong to this user' });
         }
       }
     }
   }
-});
+}
 
 app.route('/api/secret')
   .get(checkIfAuthenticated, function (req, res) {

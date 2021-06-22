@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { PlantComponent } from './plant/plant.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthService } from './auth.service';
+import { JwtInterceptor} from './jwt.interceptor';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './auth-guard.service';
@@ -16,6 +17,9 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TileComponent } from './tile/tile.component';
+import { UserManipulatorService } from './user-manipulator.service';
+import { DataService } from './data.service';
+
 
 @NgModule({
   declarations: [
@@ -49,9 +53,12 @@ import { TileComponent } from './tile/tile.component';
     })
   ],
   providers: [
+    JwtInterceptor,
     AuthService,
     AuthGuardService,
-    JwtHelperService
+    JwtHelperService,
+    UserManipulatorService,
+    DataService
     ],
   bootstrap: [AppComponent]
 })
