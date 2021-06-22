@@ -186,12 +186,21 @@ function deleteUser(username, password, userID) {
   }
 
   if (userPassword === password) {
-    con.query("DELETE FROM customers WHERE AccountNaam = '" + username + "';"), function (err) {
+    con.query("DELETE FROM user WHERE UserID = '" + userID + "';"), function (err) {
       if (err) {
         res.status(500).json({ message: 'failed to delete user with name: ' + username });
       }
       else {
         res.json({message: 'user deleted'})
+      }
+    }
+
+    con.query("DELETE FROM userplants WHERE UserID = '" + userID + "';"), function (err) {
+      if (err) {
+        res.status(500).json({ message: 'failed to delete userplants from user: ' + username });
+      }
+      else {
+        res.json({message: 'user deleted, userplants deleted'})
       }
     }
   }
