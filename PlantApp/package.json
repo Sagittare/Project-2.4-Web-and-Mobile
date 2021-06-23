@@ -22,6 +22,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "angular": "^1.8.2",
     "angular2-jwt": "^0.2.3",
+    "file-system": "^2.2.2",
     "fs": "0.0.1-security",
     "jasmine": "^3.7.0",
     "jest": "^27.0.4",
@@ -32,6 +33,7 @@
     "rxjs": "~6.6.0",
     "serve": "^11.3.2",
     "tslib": "^2.1.0",
+    "web-push": "^3.4.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
