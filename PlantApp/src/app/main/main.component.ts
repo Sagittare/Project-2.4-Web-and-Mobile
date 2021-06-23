@@ -16,10 +16,7 @@ export class MainComponent {
   
 
   subscribeNotifications(){
-    if (!this.swPush.isEnabled){
-      console.log("Notifications not enabled")
-      return;
-    }
+    
     this.swPush.requestSubscription({
       serverPublicKey: this.publicKey
     })

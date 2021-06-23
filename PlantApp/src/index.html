@@ -1,5 +1,19 @@
 <!doctype html>
 <html lang="en">
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("ngsw-worker.js")
+        .then(function (registration) {
+          console.log("success load");
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
+  </script>
+
 <head>
   <meta charset="utf-8">
   <title>PlantApp</title>
