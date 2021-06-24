@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate {
     geval gewoon een true.
 */
   canActivate(): boolean { 
-    if(localStorage.getItem("token")){
+    if(this.auth.isLoggedIn()){
       return true
     }
     else{

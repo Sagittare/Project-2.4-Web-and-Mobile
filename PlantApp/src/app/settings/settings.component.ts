@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserManipulatorService } from '../user-manipulator.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class SettingsComponent  {
   constructor(
     private formBuilder: FormBuilder,
     private userManipulator: UserManipulatorService,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private router: Router
     ) {}
     
 
@@ -77,7 +79,10 @@ export class SettingsComponent  {
       const newPasswordVerify = this.passwordForm.value.newPasswordVerify;
       const token = localStorage.getItem("token");
       if (newPassword == newPasswordVerify) {
-        this.userManipulator.editPassword(password, newPassword, token).subscribe();
+        let pwedit = this.userManipulator.editPassword(password, newPassword, token).subscribe();
+        if (pwedit) {
+          alert("wachtwoord gewijzigd.")
+        }
       }
       else {
         alert("Nieuwe wachtwoorden zijn niet gelijk.")
@@ -93,12 +98,13 @@ export class SettingsComponent  {
         this.userManipulator.DeleteUser(name, password).subscribe();
       }
       else {
-        //show that operation was cancelled by user input!
+        alert("niet bevestigd.")
       }
     }
 
     onSubmitLogout(): void {
       this.AuthService.logout();
+      this.router.navigate(['login']);
     }
 
   }

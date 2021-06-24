@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http'
 import { subscribeOn } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -28,12 +29,18 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private AuthService: AuthService
+    private authService: AuthService,
+    private router: Router
+
     ) {}
 
   onSubmit(): void {
-    const login = this.AuthService.login(this.loginForm.value.username, this.loginForm.value.password);
+    const login = this.authService.login(this.loginForm.value.username, this.loginForm.value.password);
     login.subscribe();
+    if(login) {
+      this.router.navigate(['/settings'])
+    }
+    
   }
   
 }
