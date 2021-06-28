@@ -630,7 +630,8 @@ body {
       font-weight: normal;
       font-family: "Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
       display: inline;
-      line-height: 0; }
+      line-height: 0;
+      font-display: swap; }
       .fr-view span.fr-emoticon.fr-emoticon-img {
         background-repeat: no-repeat !important;
         font-size: inherit;
@@ -664,7 +665,8 @@ body {
       background-clip: padding-box;
       background: #f5f5f5;
       padding: 10px;
-      font-family: "Courier New", Courier, monospace; }
+      font-family: "Courier New", Courier, monospace;
+      font-display: swap; }
     .fr-view .fr-class-transparency {
       opacity: 0.5; }
     .fr-view img {
@@ -4493,6 +4495,7 @@ body {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    font-display: swap;
   }
   body {
     margin: 0;
@@ -4584,6 +4587,7 @@ body {
   samp {
     font-family: monospace,monospace;
     font-size: 1em;
+    font-display: swap;
   }
   hr {
     box-sizing: content-box;
@@ -5103,6 +5107,7 @@ body {
     letter-spacing: inherit;
     text-transform: inherit;
     font-style: inherit;
+    font-display: swap;
     font-weight: inherit;
     text-decoration: none;
     border: 0 none transparent;
@@ -5159,6 +5164,7 @@ body {
     line-height: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
+    font-display: swap;
   }
   .u-text:not(ul):not(ol):not(p):not(.u-post-content):not(.u-block-content):not(.u-product-desc):not(.u-cart-block-content) a {
     color: inherit;
@@ -5227,6 +5233,7 @@ body {
     line-height: inherit !important;
     letter-spacing: inherit !important;
     text-transform: inherit !important;
+    font-display: swap;
   }
   .u-logo {
     color: inherit;
@@ -5243,6 +5250,7 @@ body {
     background-color: transparent;
     margin: 0;
     -webkit-text-decoration-skip: objects;
+    font-display: swap;
   }
   .u-image.u-logo {
     display: table;
@@ -16905,6 +16913,7 @@ body {
     background-color: transparent;
     margin: 0;
     -webkit-text-decoration-skip: objects;
+    font-display: swap;
   }
   .u-nav-link,
   .u-nav-link:hover,
@@ -17318,57 +17327,75 @@ body {
   }
   .u-font-arial.u-custom-font {
     font-family: Arial, sans-serif !important;
+    font-display: swap;
   }
   .u-font-courier-new.u-custom-font {
     font-family: 'Courier New', monospace !important;
+    font-display: swap;
   }
   .u-font-georgia.u-custom-font {
     font-family: Georgia, serif !important;
+    font-display: swap;
   }
   .u-font-roboto.u-custom-font {
     font-family: Roboto, sans-serif !important;
+    font-display: swap;
   }
   .u-font-open-sans.u-custom-font {
     font-family: 'Open Sans', sans-serif !important;
+    font-display: swap;
   }
   .u-font-lato.u-custom-font {
     font-family: Lato, sans-serif !important;
+    font-display: swap;
   }
   .u-font-montserrat.u-custom-font {
     font-family: Montserrat, sans-serif !important;
+    font-display: swap;
   }
   .u-font-roboto-condensed.u-custom-font {
     font-family: 'Roboto Condensed', sans-serif !important;
+    font-display: swap;
   }
   .u-font-source-sans-pro.u-custom-font {
     font-family: 'Source Sans Pro', sans-serif !important;
+    font-display: swap;
   }
   .u-font-oswald.u-custom-font {
     font-family: Oswald, sans-serif !important;
+    font-display: swap;
   }
   .u-font-raleway.u-custom-font {
     font-family: Raleway, sans-serif !important;
+    font-display: swap;
   }
   .u-font-pt-sans.u-custom-font {
     font-family: 'PT Sans', sans-serif !important;
+    font-display: swap;
   }
   .u-font-ubuntu.u-custom-font {
     font-family: Ubuntu, sans-serif !important;
+    font-display: swap;
   }
   .u-font-titillium-web.u-custom-font {
     font-family: 'Titillium Web', sans-serif !important;
+    font-display: swap;
   }
   .u-font-merriweather.u-custom-font {
     font-family: Merriweather, serif !important;
+    font-display: swap;
   }
   .u-font-roboto-slab.u-custom-font {
     font-family: 'Roboto Slab', serif !important;
+    font-display: swap;
   }
   .u-font-playfair-display.u-custom-font {
     font-family: 'Playfair Display', serif !important;
+    font-display: swap;
   }
   .u-font-lobster.u-custom-font {
     font-family: Lobster, display !important;
+    font-display: swap;
   }
   .u-rectangle {
     border-radius: 0;
@@ -17444,6 +17471,7 @@ body {
     -webkit-text-decoration-skip: objects;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    font-display: swap;
   }
   .u-social-icons .u-icon {
     display: flex;
@@ -17535,6 +17563,7 @@ body {
   }
   .u-search input::placeholder {
     font-family: inherit;
+    font-display: swap;
   }
   .u-search-icon {
     box-sizing: content-box;
@@ -19114,6 +19143,7 @@ body {
     padding: 10px 20px;
     border-color: transparent;
     cursor: pointer;
+    font-display: swap;
   }
   .u-accordion-link-icon {
     margin-left: auto;
@@ -19216,6 +19246,7 @@ body {
     color: #fff;
     text-align: center;
     opacity: 1;
+    font-display: swap;
   }
   .u-gallery-nav-prev span svg,
   .u-gallery-nav-next span svg,
@@ -20087,6 +20118,7 @@ body {
   /*begin-variables font-family*/
   .u-body {
     font-family: 'Open Sans',sans-serif;
+    font-display: swap;
   }
   h1,
   h2,
@@ -20095,6 +20127,7 @@ body {
   h5,
   h6 {
     font-family: Roboto,sans-serif;
+    font-display: swap;
   }
   /*end-variables font-family*/
   /*begin-variables color*/
@@ -20115,9 +20148,11 @@ body {
   /*begin-variables font*/
   .u-custom-font.u-text-font {
     font-family: 'Open Sans',sans-serif !important;
+    font-display: swap;
   }
   .u-custom-font.u-heading-font {
     font-family: Roboto,sans-serif !important;
+    font-display: swap;
   }
   /*end-variables font*/
   /*begin-variables colors*/
@@ -34201,6 +34236,7 @@ body {
   .u-header .u-text-1 {
     font-family: "Racing Sans One";
     margin: -42px 727px 25px 119px;
+    font-display: swap;
   }
   
   .u-header .u-btn-1 {
