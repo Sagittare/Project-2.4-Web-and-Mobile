@@ -1,4 +1,4 @@
 [
-    {"uniqueID": "1", "plantID": "1", "userID": "1", "descriptionOverride": "0x6d796465736372697074696f6e", "nameOverride": "a name", "alive": "1"}, 
-    {"uniqueID": "2", "plantID": "7", "userID": "2", "descriptionOverride": "0x796f75726465736372697074696f6e", "nameOverride": "another plant name", "alive": "1"}
+    {"uniqueID": 1, "plantID": 1, "userID": 1, "descriptionOverride": "", "nameOverride": "", "alive": 1}, 
+    {"uniqueID": 2, "plantID": 7, "userID": 2, "descriptionOverride": "", "nameOverride": "", "alive": 1}
 ]

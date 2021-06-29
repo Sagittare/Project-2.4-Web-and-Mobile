@@ -1,5 +1,8 @@
 <p><!--AYAYA--></p>
-<!-- <p>settings works!</p> -->
+
+<div class="center">
+	<h1>Settings</h1>
+<div>
 <form [formGroup]="SettingsForm" (ngSubmit)="onSubmit()">
 
 	<div class="center">
@@ -44,7 +47,10 @@
 	</div>
 
 </form>
-
+<br>
+<div class="center">
+	<h2>Wijzig gebruikersnaam</h2>
+<div>
 <form [formGroup]="nameForm" (ngSubmit)="onSubmitName()">
 
 	<div class="center">
@@ -66,7 +72,10 @@
 	</div>
 
 </form>
-
+<br>
+<div class="center">
+	<h2>Wijzig wachtwoord</h2>
+<div>
 <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
 
 	<div class="center">
@@ -95,13 +104,27 @@
 	</div>
 
 </form>
+<br>
+<div class="center">
+	<h2>Uitloggen</h2>
+<div>
+<form [formGroup]="logoutForm" (ngSubmit)="onSubmitLogout()">
 
+	<div class="center">
+		<button class="button" type="submit">Log uit</button>
+	</div>
 
+</form>
+<br>
+<br>
+<div class="center">
+	<h1>Verwijder huidige gebruiker - PERMANENT!</h1>
+<div>
 <form [formGroup]="deleteForm" (ngSubmit)="onSubmitDelete()">
 
 	<div class="center">
     	<label for="username">
-    		Nieuwe gebruikersnaam
+    		Gebruikersnaam
     	</label>
     	<input id="username" type="text" formControlName="username">
 	</div>
@@ -120,14 +143,6 @@
 
 	<div class="center">
 		<button class="button" type="submit">Verwijder mij!</button>
-	</div>
-
-</form>
-
-<form [formGroup]="logoutForm" (ngSubmit)="onSubmitLogout()">
-
-	<div class="center">
-		<button class="button" type="submit">Log uit</button>
 	</div>
 
 </form>

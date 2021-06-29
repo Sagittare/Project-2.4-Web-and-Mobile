@@ -1,6 +1,20 @@
-<p>main works!</p>
-
 <div id="mainDiv">
+
+	<form [formGroup]="plantForm" (ngSubmit)="getPlant()">
+
+	<div class="center">
+    	<label for="plantID">
+    		plantID
+    	</label>
+    	<input id="plantID" type="text" formControlName="plantID">
+	</div>
+
+	<div class="center">
+		<button class="button" type="submit">Ophalen</button>
+	</div>
+
+</form>
+
 
 	<router-outlet></router-outlet>
 	<button (click)= "subscribeNotifications()">Subscribe for more</button>
@@ -16,5 +30,5 @@
 			</div><!--/products-->
 		</div>
 	</section> 
-
+	
 </div>

@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { shareReplay, tap } from 'rxjs/operators'
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { shareReplay, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './jwt.interceptor';
-
 
 const API_URL = 'http://192.168.1.2:1337/api/'
 

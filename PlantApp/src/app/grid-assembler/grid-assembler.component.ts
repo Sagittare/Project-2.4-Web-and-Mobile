@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,20 +10,16 @@ import { DataService } from '../data.service';
 export class GridAssemblerComponent implements OnInit {
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
-
-
-  private getData() {
-    this.dataService.getUserPlants().subscribe(res => {
-      const json = res;
+  public getData() {
+    const getPlants = this.dataService.getUserPlants(this.authService.getToken());
+    getPlants.subscribe(res => {
       console.log(JSON.stringify(res))
-    });
-    
-    
+    })
   }
-
 }

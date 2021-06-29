@@ -96,7 +96,12 @@ export class SettingsComponent  {
       const confirm = this.deleteForm.value.confirm;
       const token = localStorage.getItem("token");
       if (confirm == 1) {
-        this.userManipulator.DeleteUser(name, password, token).subscribe();
+        this.userManipulator.DeleteUser(name, password, token).subscribe(logout => {
+          this.authService.logout();
+          if(!this.authService.isLoggedIn()) {
+            this.router.navigate(['login']);
+          }
+        });
       }
       else {
         alert("niet bevestigd.")

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
-
+import { shareReplay, tap } from 'rxjs/operators';
 
 const API_URL = 'http://192.168.1.2:1337/api/'
 
@@ -15,9 +15,15 @@ export class DataService {
     private http: HttpClient
   ) { }
 
-  getUserPlants() {
-    return this.http.get(API_URL+'getUserPlants');
-    
+  getUserPlants(token:string | null) {
+    return this.http.post(API_URL+'getUserPlants', {token})
+      .pipe (
+          tap ( 
+              //res => this.parsePlants(res),
+              //err => this.handleError(err),
+          ),
+          shareReplay()
+      )
   }
 
   getPlantInformation(plantID:number) {
