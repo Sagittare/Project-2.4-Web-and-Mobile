@@ -10,12 +10,14 @@ import { PlantAdderComponent } from './plant-adder/plant-adder.component';
 
 const routes: Routes = [ 
   {path: '', children: [
-    {path: 'main', 
-    component: MainComponent,
-    children: [
-      {path: 'plants', component: GridAssemblerComponent},
+    {path: 'main', component: MainComponent, children: [
       {path: 'addplant', component: PlantAdderComponent}
-    ]},
+    ] },
+    {path: 'grid', 
+      component: GridAssemblerComponent,
+      children: [
+        {path: 'tile', component: TileComponent }
+      ]},
     {path: 'login', component: LoginComponent},
     {path: 'settings',
     component: SettingsComponent,

@@ -1,0 +1,4 @@
+[
+    {"uniqueID": 1, "plantID": 1, "userID": 1, "descriptionOverride": "", "nameOverride": "", "alive": 1}, 
+    {"uniqueID": 2, "plantID": 7, "userID": 2, "descriptionOverride": "", "nameOverride": "", "alive": 1}
+]
