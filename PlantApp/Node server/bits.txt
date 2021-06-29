@@ -1,0 +1,9 @@
+CREATE TABLE UserPlants (
+	UniqueID int AUTO_INCREMENT,
+	PlantID int,
+	UserID int,
+	DescriptionOverride TEXT(10000),
+	NameOverride varchar(255),
+	Alive boolean,
+	PRIMARY KEY(UniqueID)
+);

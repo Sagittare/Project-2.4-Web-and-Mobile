@@ -1,5 +1,5 @@
-<p><!--AYAYA--></p>
-
+<h1>Inloggen</h1>
+<br>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
 	<div class="center">
@@ -18,6 +18,30 @@
 
 	<div class="center">
 		<button class="button" type="submit">Login</button>
+	</div>
+
+</form>
+<br>
+<h1>Registreren</h1>
+<br>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+
+	<div class="center">
+    	<label for="username">
+    		Username
+    	</label>
+    	<input id="username" type="text" formControlName="username">
+	</div>
+
+	<div class="center">
+    	<label for="password">
+      		Password
+    	</label>
+    	<input id="password" type="password" formControlName="password">
+  	</div>
+
+	<div class="center">
+		<button class="button" type="submit">Registreren</button>
 	</div>
 
 </form>

@@ -46,7 +46,7 @@ export class SettingsComponent  {
   constructor(
     private formBuilder: FormBuilder,
     private userManipulator: UserManipulatorService,
-    private AuthService: AuthService,
+    private authService: AuthService,
     private router: Router
     ) {}
     
@@ -70,7 +70,8 @@ export class SettingsComponent  {
     onSubmitName(): void {
       const name = this.nameForm.value.username;
       const password = this.nameForm.value.password;
-      this.userManipulator.editUsername(name, password).subscribe();
+      const token = localStorage.getItem("token");
+      this.userManipulator.editUsername(name, password, token).subscribe();
     }
 
     onSubmitPassword(): void {
@@ -93,9 +94,9 @@ export class SettingsComponent  {
       const name = this.deleteForm.value.username;
       const password = this.deleteForm.value.password;
       const confirm = this.deleteForm.value.confirm;
-
+      const token = localStorage.getItem("token");
       if (confirm == 1) {
-        this.userManipulator.DeleteUser(name, password).subscribe();
+        this.userManipulator.DeleteUser(name, password, token).subscribe();
       }
       else {
         alert("niet bevestigd.")
@@ -103,8 +104,9 @@ export class SettingsComponent  {
     }
 
     onSubmitLogout(): void {
-      this.AuthService.logout();
-      this.router.navigate(['login']);
+      this.authService.logout();
+      if(!this.authService.isLoggedIn()) {
+        this.router.navigate(['login']);
+      }
     }
-
   }

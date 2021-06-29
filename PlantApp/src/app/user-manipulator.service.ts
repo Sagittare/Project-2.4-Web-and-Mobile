@@ -16,16 +16,16 @@ export class UserManipulatorService {
     private http: HttpClient
   ) { }
 
-  createUser(name:string, password:string ) {
-    return this.http.post<User>(API_URL+'createUser', {name, password})
+  createUser(username:string, password:string ) {
+    return this.http.post<User>(API_URL+'createUser', {username, password})
   }
 
-  DeleteUser(name:string, password:string ) {
-    return this.http.post<User>(API_URL+'deleteUser', {name, password})
+  DeleteUser(username:string, password:string, token:string | null) {
+    return this.http.post<User>(API_URL+'deleteUser', {username, password, token})
   }
 
-  editUsername(name:string, password:string) {
-    return this.http.post<User>(API_URL+'editUsername', {name, password})
+  editUsername(username:string, password:string, token:string | null) {
+    return this.http.post<User>(API_URL+'editUsername', {username, password, token})
   }
 
   editPassword(password:string, newPassword:string, token:string | null) {
