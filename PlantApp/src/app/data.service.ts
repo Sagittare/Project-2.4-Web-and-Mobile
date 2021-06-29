@@ -30,16 +30,20 @@ export class DataService {
     return this.http.post(API_URL+'getPlantInformation', {plantID})
   }
 
-  addPlant(name:string, description:string, notificationFrequency:number, wateramount:string ) {
-    return this.http.post(API_URL+'addPlant', {name, description, notificationFrequency, wateramount})
+  addPlant(name:string, description:string, notificationFrequency:number, wateramount:string, minTemp:string, maxTemp:string) {
+    return this.http.post(API_URL+'addPlant', {name, description, notificationFrequency, wateramount, minTemp, maxTemp})
   }
 
-  setUserPlant(plantID:number, description:string | null, name:string | null ) {
-    return this.http.post(API_URL+'setUserPlant', {plantID, description, name})
+  setUserPlant(plantID:number, description:string, name:string , token:string) {
+    return this.http.post(API_URL+'setUserPlant', {plantID, description, name, token})
   }
 
   removeUserPlant(uniqueID:number) {
     return this.http.post(API_URL+'removeUserPlant', {uniqueID})
+  }
+
+  getPlants(){
+    return this.http.get(API_URL+'getPlantList')
   }
 
 }

@@ -20,6 +20,7 @@ import { TileComponent } from './tile/tile.component';
 import { UserManipulatorService } from './user-manipulator.service';
 import { DataService } from './data.service';
 import { GridAssemblerComponent } from './grid-assembler/grid-assembler.component';
+import { PlantAdderComponent } from './plant-adder/plant-adder.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { GridAssemblerComponent } from './grid-assembler/grid-assembler.componen
     SettingsComponent,
     TileComponent,
     GridAssemblerComponent,
+    PlantAdderComponent,
   ],
   imports: [
     BrowserModule,

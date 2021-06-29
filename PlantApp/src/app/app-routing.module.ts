@@ -6,13 +6,15 @@ import { MainComponent } from './main/main.component';
 import { TileComponent } from './tile/tile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GridAssemblerComponent } from './grid-assembler/grid-assembler.component';
+import { PlantAdderComponent } from './plant-adder/plant-adder.component';
 
 const routes: Routes = [ 
   {path: '', children: [
     {path: 'main', 
     component: MainComponent,
     children: [
-      {path: 'plants', component: GridAssemblerComponent}
+      {path: 'plants', component: GridAssemblerComponent},
+      {path: 'addplant', component: PlantAdderComponent}
     ]},
     {path: 'login', component: LoginComponent},
     {path: 'settings',

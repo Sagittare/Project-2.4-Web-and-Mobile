@@ -1,0 +1,89 @@
+<div class="center">
+	<h2>Voeg plant toe aan database</h2>
+<div>
+<form [formGroup]="plantAdderForm" (ngSubmit)="addPlant()">
+
+	<div class="center">
+    	<label for="plantName">
+    		plantnaam
+    	</label>
+    	<input id="plantName" type="text" formControlName="plantName">
+	</div>
+
+	<div class="center">
+    	<label for="description">
+    		beschrijving
+    	</label>
+    	<input id="description" type="text" formControlName="description">
+	</div>
+	
+	<div class="center">
+    	<label for="notificationfrequency">
+    		notificatiefrequentie: 1 keer per x minuten
+    	</label>
+    	<input id="notificationfrequency" type="text" formControlName="notificationfrequency">
+	</div>
+
+	<div class="center">
+    	<label for="waterAmount">
+    		hoeveelheid water
+    	</label>
+    	<input id="waterAmount" type="text" formControlName="waterAmount">
+	</div>
+
+	<div class="center">
+    	<label for="minTemp">
+    		minimumtemperatuur
+    	</label>
+    	<input id="minTemp" type="text" formControlName="minTemp">
+	</div>
+
+	<div class="center">
+    	<label for="maxTemp">
+    		maximumtemperatuur
+    	</label>
+    	<input id="maxTemp" type="text" formControlName="maxTemp">
+	</div>
+
+	<div class="center">
+		<button class="button" type="submit">Voeg plant toe</button>
+	</div>
+
+</form>
+<br>
+<div class="center">
+	<h2>voeg plant toe aan gebruiker</h2>
+<div>
+<button (click)= "getPlants()">Refresh list of plants</button>
+<br>
+<form [formGroup]="userplantAdderForm" (ngSubmit)="addUserplant()">
+
+	<div class="center">
+    	<label for="plantIDSelector">
+    		selecteer een plantsoort:
+    	</label>
+    	<select id="plantIDSelector" type="text" formControlName="plantIDSelector">
+			<option value="plant1">plant 1</option>
+			<option value="plant2">plant 2</option>
+		</select>
+	</div>
+
+	<div class="center">
+    	<label for="plantName">
+    		plantnaam (optioneel)
+    	</label>
+    	<input id="plantName" type="text" formControlName="plantName">
+	</div>
+
+	<div class="center">
+    	<label for="description">
+    		beschrijving (optioneel)
+    	</label>
+    	<input id="description" type="text" formControlName="description">
+	</div>
+
+	<div class="center">
+		<button class="button" type="submit">voeg plant toe</button>
+	</div>
+
+</form>

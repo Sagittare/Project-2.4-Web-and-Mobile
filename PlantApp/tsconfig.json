@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "strictNullChecks":false,
     "types" : ["node", "zone.js", "jasmine"],
     "noImplicitAny": false,
     "baseUrl": "./",
@@ -26,6 +27,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "strictNullChecks":false
   }
 }
