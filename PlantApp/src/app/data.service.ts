@@ -30,7 +30,7 @@ export class DataService {
     return this.http.post(API_URL+'getPlantInformation', {plantID})
   }
 
-  addPlant(name:string, description:string, notificationFrequency:number, wateramount:string, minTemp:string, maxTemp:string) {
+  addPlant(name:string, description:string, notificationFrequency:number, wateramount:string, minTemp:number, maxTemp:number) {
     return this.http.post(API_URL+'addPlant', {name, description, notificationFrequency, wateramount, minTemp, maxTemp})
   }
 

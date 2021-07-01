@@ -38,7 +38,7 @@ export class PlantAdderComponent implements OnInit{
 
 
   addPlant() {
-    this.dataService.addPlant(this.plantAdderForm.value.plantName, this.plantAdderForm.value.description, this.plantAdderForm.value.notificationFrequency, this.plantAdderForm.value.wateramount, this.plantAdderForm.value.minTemp, this.plantAdderForm.value.maxTemp).subscribe();
+    this.dataService.addPlant(this.plantAdderForm.value.plantName, this.plantAdderForm.value.description, (this.plantAdderForm.value.notificationFrequency * 60), this.plantAdderForm.value.wateramount, this.plantAdderForm.value.minTemp, this.plantAdderForm.value.maxTemp).subscribe();
   }
 
   addUserplant() {

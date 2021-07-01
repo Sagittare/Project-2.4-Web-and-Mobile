@@ -11,9 +11,9 @@ import { FormBuilder } from '@angular/forms';
 export class MainComponent {
   readonly VAPID_PUBLIC_KEY = "MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEzCFrALch4sArU0psCD5XPVbU9ExtE+LFYiVg9LnXLRH6lL4XQBCPNbRZWPN4+uoYzyxupU6HZM5nNbDFK5opyg==";
 
-  plantForm = this.formBuilder.group({
-    plantID: ''
-  });
+  // plantForm = this.formBuilder.group({
+  //   plantID: ''
+  // });
 
   constructor(
     private swPush: SwPush,
@@ -34,12 +34,12 @@ export class MainComponent {
       )
   }
 
-  getPlant() {
-    this.dataService.getPlantInformation(this.plantForm.value.plantID).subscribe(result => 
-    {
-      console.log(JSON.stringify(result))
-    });
+  // getPlant() {
+  //   this.dataService.getPlantInformation(this.plantForm.value.plantID).subscribe(result => 
+  //   {
+  //     console.log(JSON.stringify(result))
+  //   });
     
-  }
+  // }
 
 }
